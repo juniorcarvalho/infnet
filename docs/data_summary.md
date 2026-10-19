@@ -120,8 +120,12 @@ source .venv/bin/activate
 python src/data_access.py
 ```
 
-O Streamlit consome somente o JSON processado e não realiza chamadas de rede
-durante a navegação:
+A API lê o JSON processado sem coletar fontes externas. O Streamlit consulta
+essa API por HTTP durante a navegação (comandos em terminais separados):
+
+```bash
+python -m uvicorn src.api:app --host 127.0.0.1 --port 8000
+```
 
 ```bash
 streamlit run app.py
@@ -147,16 +151,97 @@ descartado porque não está disponível nessa listagem da Wikipédia.
 O resultado é salvo em
 `data/processed/municipios_brasil_wikipedia.csv` por meio de uma execução
 explícita (`SCRAPE_MUNICIPIOS=1 python src/data_access.py`). O dashboard lê
-somente esse CSV local, apresentando tabela, busca e frequência das palavras dos
-nomes municipais. A fonte pode mudar de estrutura ou ficar indisponível; por
-isso a extração não é executada durante a navegação e a ausência do arquivo é
-sinalizada na interface.
+esse CSV local quando disponível; caso contrário, usa automaticamente a
+amostra `data/municipios_brasil_wikipedia_amostra.csv`, incluída no Git, com
+52 municípios dos 26 estados. O recorte contém os primeiros dois registros
+de cada estado presente na coleta e é identificado na interface como amostra.
+Não é uma amostra estatística representativa: a frequência de palavras
+corresponde apenas ao recorte. O Distrito Federal não aparece na coleta local
+usada para gerar a amostra. A origem e os critérios estão em `data/README.md`.
+A fonte pode mudar de estrutura ou ficar indisponível, por isso a coleta
+completa permanece explícita e fora da navegação. Reinicie o Streamlit após
+coletar para renovar o cache municipal.
 
-## 9. Upload e estado da sessão
+## 9. API e registros complementares (TP3)
 
-O upload aceita CSVs consolidados ou arquivos municipais SNIS com as colunas
-mínimas documentadas no painel. O conteúdo é validado, mantido em
-`st.session_state["upload_registros"]` e disponibilizado para consulta e
-download sem alterar o cache JSON oficial. `st.cache_data` é usado para
-reutilizar o cache processado e a referência territorial entre reruns do
-Streamlit.
+`src/api.py` oferece GET e POST em `/dados`, com documentação automática em
+`/docs`, `/redoc` e `/openapi.json`. A API nunca coleta dados externos durante
+as requisições. O Streamlit usa `src/api_client.py`, configurado por
+`SANEAMENTO_API_URL` (padrão `http://127.0.0.1:8000`).
+
+`GET /dados` responde com `fontes` (metadados do cache oficial) e `registros`
+(oficiais e complementares). Os filtros opcionais são `ano` (inteiro entre
+1 e 9999) e `regiao` (Norte, Nordeste, Sudeste, Sul ou Centro-Oeste). Resultado
+vazio é uma consulta válida com lista vazia. A ausência do cache oficial
+resulta em HTTP 503; formato inválido ou falha de leitura resulta em HTTP 500.
+
+`POST /dados` recebe uma lista não vazia com sete campos obrigatórios:
+
+| Campo | Regra |
+| --- | --- |
+| Ano | Inteiro JSON entre 1 e 9999 |
+| UF | Nome ou identificação da UF, texto não vazio |
+| Sigla | Sigla válida, normalizada para maiúsculas |
+| Regiao | Região brasileira correspondente à sigla |
+| Atendimento_Agua | Número finito entre 0 e 100 |
+| Atendimento_Esgoto | Número finito entre 0 e 100 |
+| Pop_Sem_Saneamento_Milhoes | Número finito maior ou igual a zero |
+
+Campos adicionais e booleanos em campos numéricos são rejeitados. A API usa
+`normalizar_registros` e `calcular_prioridade`; déficits e score são calculados
+no servidor. O POST responde com HTTP 201 e os novos registros no envelope
+`fontes`/`registros`. Payloads e filtros inválidos produzem HTTP 422. Falhas de
+persistência produzem HTTP 500, preservando o arquivo anterior quando a
+substituição atômica não é concluída.
+
+O armazenamento complementar é exclusivo em
+`data/processed/dados_complementares.json`, com uma lista em `registros`.
+O POST acrescenta novos registros sem sobrescrever o cache SNIS. O arquivo
+complementar ausente equivale a uma lista vazia; formato inválido gera erro,
+sem recriação silenciosa. A API marca cada registro como `Origem: oficial`
+ou `Origem: complementar`. Complementares recebem `Importado_Em` em UTC;
+a data indica importação e não a data de coleta da fonte enviada pelo usuário.
+Não há verificação externa de autenticidade desses dados. A fonte declarada
+do cache oficial é preservada, e não é atribuída aos registros complementares.
+
+O arquivo complementar tem gravação atômica e lock em um processo. A execução
+suportada usa um worker; coordenação entre instâncias requer outra solução de
+persistência. Não há deduplicação: reenvios criam novas linhas para a mesma
+UF/ano. A exploração permite filtrar a origem, iniciando pela oficial. Médias
+são simples sobre os registros exibidos; somas populacionais podem duplicar
+pessoas se forem incluídos lotes sobrepostos.
+
+## 10. Upload, navegação e exportação
+
+O menu `st.navigation` separa exploração/ranking, consulta/importação e
+metodologia/fontes. As consultas e os gráficos usam o GET da API; erros são
+exibidos sem impedir a navegação para a metodologia.
+
+O upload aceita CSV UTF-8 separado por vírgula, no formato consolidado acima
+ou com as seis colunas municipais urbanas descritas na seção 2. O segundo
+formato é agregado por UF/ano antes do envio. Preserva-se a política de
+agregação: valores municipais vazios ou inválidos não contribuem e grupos
+sem denominadores não geram indicadores. O CSV consolidado é validado por
+`normalizar_registros`; cabeçalhos duplicados, linhas com quantidade incorreta
+de células e ausência de registros válidos são rejeitados.
+
+A prévia antecede o botão de envio. A persistência acontece somente após POST
+bem-sucedido; o upload não altera diretamente os arquivos. A exportação é um
+CSV UTF-8 com BOM dos dados consultados e filtrados, incluindo a origem. Na
+reimportação, são enviados apenas os sete campos de entrada. A referência
+municipal mantém `st.cache_data`, e as consultas de indicadores são renovadas
+a cada execução da página para refletir os lotes persistidos.
+
+## 11. Preparação para LLMs
+
+Os dados atuais são tabulares e não contêm texto apropriado para resumo,
+análise de sentimento ou Q&A. A lista municipal é uma referência de nomes,
+sem conteúdo documental suficiente para essas tarefas.
+
+Uma evolução futura exigirá relatórios ou documentos de saneamento com fonte,
+data, licença e contexto territorial registrados. Será necessário limpar e
+segmentar os textos, associá-los aos indicadores por UF/ano e avaliar respostas
+com citações e critérios de fidelidade. Este TP3 apresenta essa preparação na
+metodologia e não adiciona inferência, recomendações automáticas ou provedor.
+Beautiful Soup é mantido para a fonte HTML estática; Selenium só se justifica
+com uma fonte necessária que dependa de interação ou carregamento dinâmico.

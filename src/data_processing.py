@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any
 
 
@@ -114,15 +115,43 @@ def consolidar_dados_urbanos(rows: list[dict[str, Any]]) -> list[dict[str, Any]]
 def normalizar_registros(registros: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Converte valores numéricos e rejeita registros estruturalmente inválidos."""
 
+    if not isinstance(registros, list):
+        raise ValueError("Esperada uma lista de registros consolidados.")
     normalizados = []
     for registro in registros:
+        if not isinstance(registro, dict):
+            raise ValueError("Cada registro deve ser um objeto.")
         missing = REQUIRED_FIELDS - registro.keys()
         if missing:
             raise ValueError(f"Campos ausentes para {registro.get('UF', '?')}: {sorted(missing)}")
 
         item = dict(registro)
+        for field in ("UF", "Sigla", "Regiao"):
+            if not isinstance(item[field], str) or not item[field].strip():
+                raise ValueError(f"Campo {field} deve ser um texto não vazio.")
+            item[field] = item[field].strip()
+        item["Sigla"] = item["Sigla"].upper()
+        if item["Sigla"] not in REGIAO_POR_UF:
+            raise ValueError("Sigla da UF inválida.")
+        if item["Regiao"] != REGIAO_POR_UF[item["Sigla"]]:
+            raise ValueError("Região incompatível com a sigla da UF.")
+        if "Ano" in item:
+            try:
+                ano = _to_float(item["Ano"])
+                if isinstance(item["Ano"], bool) or not isfinite(ano) or not ano.is_integer() or not 1 <= ano <= 9999:
+                    raise ValueError
+                item["Ano"] = int(ano)
+            except (TypeError, ValueError, OverflowError) as exc:
+                raise ValueError("Ano deve ser um inteiro entre 1 e 9999.") from exc
         for field in ("Atendimento_Agua", "Atendimento_Esgoto", "Pop_Sem_Saneamento_Milhoes"):
-            item[field] = _to_float(item[field])
+            try:
+                if isinstance(item[field], bool):
+                    raise ValueError
+                item[field] = _to_float(item[field])
+                if not isfinite(item[field]):
+                    raise ValueError
+            except (TypeError, ValueError, OverflowError) as exc:
+                raise ValueError(f"Campo {field} deve ser um número finito.") from exc
         if not 0 <= item["Atendimento_Agua"] <= 100:
             raise ValueError(f"Atendimento de água inválido para {item['UF']}")
         if not 0 <= item["Atendimento_Esgoto"] <= 100:

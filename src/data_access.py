@@ -26,6 +26,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROCESSED_PATH = PROJECT_ROOT / "data" / "processed" / "dados_saneamento.json"
 MUNICIPAL_CSV_PATH = PROJECT_ROOT / "data" / "br_mdr_snis_municipio_agua_esgoto.csv"
 MUNICIPIOS_WEB_PATH = PROJECT_ROOT / "data" / "processed" / "municipios_brasil_wikipedia.csv"
+MUNICIPIOS_SAMPLE_PATH = PROJECT_ROOT / "data" / "municipios_brasil_wikipedia_amostra.csv"
 MUNICIPIOS_WEB_URL = "https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_do_Brasil"
 ESTADO_POR_UF = {
     "AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas",
@@ -134,9 +135,11 @@ def salvar_municipios_web(
     return path
 
 
-def carregar_municipios_web(path: Path = MUNICIPIOS_WEB_PATH) -> list[dict[str, str]]:
-    """Carrega o CSV da extração web sem fazer chamadas de rede."""
+def carregar_municipios_web(path: Path | None = None) -> list[dict[str, str]]:
+    """Carrega a coleta local ou, na sua ausência, a amostra incluída no projeto."""
 
+    if path is None:
+        path = MUNICIPIOS_WEB_PATH if MUNICIPIOS_WEB_PATH.exists() else MUNICIPIOS_SAMPLE_PATH
     if not path.exists():
         return []
     with path.open("r", encoding="utf-8-sig", newline="") as file:

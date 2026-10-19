@@ -33,7 +33,11 @@ essa base municipal em indicadores estaduais comparáveis e exportáveis.
 - Calcular percentuais estaduais com ponderação pela população urbana
   residente.
 - Criar um cache local em `data/processed/dados_saneamento.json`.
-- Disponibilizar dashboard interativo em Streamlit.
+- Disponibilizar aplicação Streamlit com menu multipágina e integração HTTP
+  a uma API FastAPI local.
+- Consultar indicadores oficiais e complementares por ano e região.
+- Importar CSV via POST, com persistência complementar e proveniência explícita.
+- Documentar a preparação futura de fontes textuais para LLMs.
 - Permitir filtros por ano, região e critério de ordenação.
 - Exibir métricas, ranking, gráfico comparativo, tabela e download dos dados.
 - Calcular uma prioridade determinística com base nos déficits de água e
@@ -62,7 +66,12 @@ O pipeline é dividido entre:
   opcional a fontes via API.
 - `src/data_processing.py`: conversão numérica, agregação urbana, associação
   regional e cálculo dos indicadores.
-- `app.py`: carregamento exclusivo do cache local e apresentação no Streamlit.
+- `src/api_data_access.py`: arquivo complementar separado, importação datada e
+  substituição atômica.
+- `src/api.py`: GET/POST `/dados`, contratos e validação com FastAPI.
+- `src/api_client.py`: cliente HTTP e configuração por `SANEAMENTO_API_URL`.
+- `app.py` e `pages/`: navegação Streamlit, exploração, consulta/importação e
+  metodologia/fontes; funções compartilhadas em `src/ui_helpers.py`.
 
 Os campos urbanos principais são:
 
@@ -95,7 +104,10 @@ gera recomendações textuais por IA.
 
 ## Entregas técnicas
 
-- Dashboard interativo executável localmente com Streamlit.
+- Aplicação multipágina executável localmente com Streamlit.
+- API FastAPI com GET e POST documentados em `/docs`.
+- Armazenamento complementar isolado do cache oficial, com origem e data.
+- Consulta por HTTP, prévia de CSV, importação explícita e exportação filtrada.
 - Pipeline Python nativo para transformação do CSV municipal.
 - Cache JSON consolidado por UF e ano.
 - Ranking determinístico com os componentes do cálculo visíveis.
@@ -133,8 +145,9 @@ no Data Summary Report e não misturar indicadores de definições diferentes.
 
 ## Risco 3: indisponibilidade de APIs opcionais
 
-Mitigação: o dashboard utiliza o cache local e não depende de rede durante a
-navegação. A atualização principal usa o CSV local.
+Mitigação: a preparação principal usa o CSV local, sem coleta externa durante
+requisições. O painel depende da API local para indicadores e exibe erros de
+conexão ou validação; a metodologia e referência municipal continuam acessíveis.
 
 ## Risco 4: inconsistência entre municípios
 
@@ -162,3 +175,45 @@ upload/download de CSV, referência territorial extraída com Beautiful Soup e
 relatórios atualizados. A organização permanece compatível com CRISP-DM:
 entendimento do negócio, preparação e governança dos dados, modelagem dos
 indicadores, avaliação por validações e disponibilização no dashboard.
+
+# 10. Evolução TP3: API, navegação e preparação para LLM
+
+O TP3 responde à necessidade de consultar e incorporar dados de forma
+reutilizável. O fluxo principal passa a ser CSV municipal → processamento
+explícito → cache oficial → API FastAPI → páginas Streamlit. Um segundo fluxo
+recebe CSV consolidado ou municipal na interface → normalização/agregação →
+POST `/dados` → `data/processed/dados_complementares.json`. O GET combina as
+origens com identificação em cada linha, preservando as fontes do cache SNIS.
+
+A navegação oferece exploração/ranking, consulta/importação/exportação e
+metodologia/fontes. O cálculo de prioridade mantém os pesos de água e esgoto.
+Os dados complementares são identificados como fornecidos pelo usuário,
+recebem data de importação UTC e não substituem evidências oficiais.
+A visualização inicia pelo recorte oficial. Envios repetidos são aditivos,
+podendo sobrepor UF/ano; a interface informa o risco de dupla contagem.
+
+A API valida campos obrigatórios, ano, sigla/região, números finitos,
+percentuais entre 0 e 100 e população não negativa. Entrada inválida resulta
+em 422, cache oficial ausente em 503 e falha de armazenamento/formato em 500.
+A preparação das fontes continua sendo explícita, fora das requisições.
+A persistência complementar usa lock no processo e substituição atômica;
+o uso suportado é uma instância com um worker. Escalar o serviço exigirá
+banco de dados ou coordenação de escrita. O serviço local não tem autenticação.
+
+A análise das fontes mantém SNIS/Base dos Dados como base oficial. IBGE é
+integração opcional e a Wikipédia é contexto territorial. Beautiful Soup atende
+ao HTML estático atual; não há justificativa para adicionar Selenium sem uma
+fonte pertinente que exija interação ou carregamento assíncrono.
+
+A preparação para LLM exige uma fonte textual nova: os indicadores e nomes
+municipais atuais são tabulares e não sustentam resumo, sentimento ou Q&A.
+Uma próxima etapa deverá selecionar documentos de saneamento, registrar fonte,
+data e licença, segmentar os textos e relacioná-los a UF/ano. Respostas futuras
+precisarão de avaliação de fidelidade e citações. Este TP3 apenas documenta
+essa evolução, mantendo inferência e recomendações automáticas fora do escopo.
+
+Os riscos adicionais são indisponibilidade da API local, arquivos
+complementares corrompidos e sobreposição de lotes. As mitigações são mensagens
+na interface, erros HTTP documentados, gravação atômica e filtros por origem.
+A avaliação técnica inclui consultas filtradas, importação válida e inválida,
+preservação do cache oficial e navegação com API indisponível.
