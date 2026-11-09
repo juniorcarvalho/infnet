@@ -1,0 +1,6 @@
+streamlit==1.64.0
+pandas==2.3.3
+statsbombpy==1.22.0
+mplsoccer==1.8.1
+matplotlib==3.11.2
+seaborn==0.13.2
