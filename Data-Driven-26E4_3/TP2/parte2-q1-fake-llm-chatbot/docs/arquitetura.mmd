@@ -1,0 +1,13 @@
+flowchart LR
+    C["Cliente HTTP"] -->|"1. POST /chat<br/>{message}"| F["FastAPI<br/>routers.py"]
+    F -->|"2. validação<br/>strip / tamanho"| P["Pydantic<br/>ChatRequest"]
+    P -->|"3. chain.invoke"| subgraph_chain
+
+    subgraph subgraph_chain["Chain LCEL (LangChain)"]
+        T["PromptTemplate<br/>'Pergunta: {question}'"] -->|"4. prompt formatado"| L["PredefinedFakeLLM<br/>extrai pergunta, normaliza,<br/>busca exata / difflib"]
+        L -->|"5. texto"| O["StrOutputParser"]
+    end
+
+    L <-.->|"consulta"| Q[("faq.py<br/>PREDEFINED_QA<br/>+ fallback")]
+    O -->|"6. resposta"| F
+    F -->|"7. JSON<br/>{response, matched, llm}"| C

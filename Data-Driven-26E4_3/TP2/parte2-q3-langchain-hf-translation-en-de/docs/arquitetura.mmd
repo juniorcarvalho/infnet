@@ -1,0 +1,25 @@
+flowchart LR
+    C["Cliente HTTP"] -->|"1. POST /translate"| F
+
+    subgraph FAPI["FastAPI - threadpool"]
+        F["routers.py + Pydantic"] --> CH["2. text_chunking<br/>parágrafos -> frases"]
+        RA["8. reassemble"]
+    end
+
+    subgraph LCH["LangChain"]
+        PT["3. PromptTemplate<br/>'{text}' (texto puro)"] --> LLM["4. HuggingFacePipeline<br/>(langchain-huggingface)<br/>task=translation, batch_size=8"]
+        SP["7. StrOutputParser"]
+    end
+
+    subgraph HF["HuggingFace transformers - CPU"]
+        PIPE["5. transformers.pipeline<br/>'translation'"] --> TOK["5a. MarianTokenizer"]
+        TOK --> MOD["5b. MarianMTModel<br/>opus-mt-en-de, beam=4"]
+        MOD --> DEC["6. decode"]
+    end
+
+    CH -->|"chain.batch"| PT
+    LLM --> PIPE
+    DEC --> SP
+    SP --> RA
+    RA -->|"9. JSON"| C
+    HUB[("HF Hub -> ~/.cache<br/>~285 MB, 1a execução")] -.-> MOD

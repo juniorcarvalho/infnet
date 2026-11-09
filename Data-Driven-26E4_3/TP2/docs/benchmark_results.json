@@ -1,0 +1,397 @@
+{
+  "p1q1": {
+    "available": true,
+    "examples": [
+      {
+        "prompt": "Once upon a time in a small village,",
+        "generations": [
+          {
+            "generated_text": "Once upon a time in a small village, a young boy was brought here in his early twenties by his parents. The boy was a boy who wanted to get his father to join him in life. The family's main business was buying and selling",
+            "continuation": "a young boy was brought here in his early twenties by his parents. The boy was a boy who wanted to get his father to join him in life. The family's main business was buying and selling"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 1524.8
+      },
+      {
+        "prompt": "The capital of Brazil is",
+        "generations": [
+          {
+            "generated_text": "The capital of Brazil is known for its military, which in turn includes the military wing of the Brazilian military and the elite military organization known as the \"Tibetan Democratic Guard\". The Brazilian army has a vast military base",
+            "continuation": "known for its military, which in turn includes the military wing of the Brazilian military and the elite military organization known as the \"Tibetan Democratic Guard\". The Brazilian army has a vast military base"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 1772.8
+      },
+      {
+        "prompt": "Artificial intelligence will",
+        "generations": [
+          {
+            "generated_text": "Artificial intelligence will continue to evolve to create new types of AI, but it is still hard to see how we can make an AI that is completely compatible with artificial intelligence. In fact, even if we made an AI",
+            "continuation": "continue to evolve to create new types of AI, but it is still hard to see how we can make an AI that is completely compatible with artificial intelligence. In fact, even if we made an AI"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 1658.3
+      },
+      {
+        "prompt": "The best way to cook rice is",
+        "generations": [
+          {
+            "generated_text": "The best way to cook rice is to bring it to a boil in hot water, then to heat it up a bit, add the water, and let it cool for about 15 minutes. The rice you serve will be very juicy!",
+            "continuation": "to bring it to a boil in hot water, then to heat it up a bit, add the water, and let it cool for about 15 minutes. The rice you serve will be very juicy!"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 1572.2
+      }
+    ],
+    "latency_20_tokens": {
+      "median_ms": 805.0,
+      "min_ms": 656.3,
+      "status": 200,
+      "response": {
+        "prompt": "Once upon a time in a small village,",
+        "generations": [
+          {
+            "generated_text": "Once upon a time in a small village, people came together in a community hall with candles, chanting the words, \"O God, I wish",
+            "continuation": "people came together in a community hall with candles, chanting the words, \"O God, I wish"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 1186.1
+      }
+    },
+    "latency_100_tokens": {
+      "median_ms": 3333.8,
+      "min_ms": 3292.6,
+      "status": 200,
+      "response": {
+        "prompt": "Once upon a time in a small village,",
+        "generations": [
+          {
+            "generated_text": "Once upon a time in a small village, a great evil appeared in a village; and the evil-doers turned their back on the villagers, and took up the fight. The evil-wretches were defeated and banished to their homes.\n\nThe village people were the worst of the evil. Many of them were afflicted with a sort of mental disorder, and had a terrible hunger, and even drank all kinds of liquor. They would be put to death, if they had not been given any medicine. The people were a kind",
+            "continuation": "a great evil appeared in a village; and the evil-doers turned their back on the villagers, and took up the fight. The evil-wretches were defeated and banished to their homes.\n\nThe village people were the worst of the evil. Many of them were afflicted with a sort of mental disorder, and had a terrible hunger, and even drank all kinds of liquor. They would be put to death, if they had not been given any medicine. The people were a kind"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 3289.0
+      }
+    },
+    "latency_200_tokens": {
+      "median_ms": 7418.6,
+      "min_ms": 6565.9,
+      "status": 200,
+      "response": {
+        "prompt": "Once upon a time in a small village,",
+        "generations": [
+          {
+            "generated_text": "Once upon a time in a small village, the villagers decided to take the most valuable of their animals. However, the village didn't want to send the animals out in droves to save some of the villagers' livestock. The villagers decided that they can only use the animals to give a small amount of water and food to the village. When the villagers arrived at the village, they found that the villagers are very unhappy at the lack of money to help the animals and only had to spend around half the village's supplies.\n\nAs a result, the main food supply to the villagers was actually water. As a result of their decision to spend more money on the villagers, they started to build their own food. After spending at least 100,000 years, the town was very happy. They thought they are only going to give the animals food once, but, when they found out that they don't even have to give them water, the people said they are afraid. They decided to build the most powerful and best equipment they have now",
+            "continuation": "the villagers decided to take the most valuable of their animals. However, the village didn't want to send the animals out in droves to save some of the villagers' livestock. The villagers decided that they can only use the animals to give a small amount of water and food to the village. When the villagers arrived at the village, they found that the villagers are very unhappy at the lack of money to help the animals and only had to spend around half the village's supplies.\n\nAs a result, the main food supply to the villagers was actually water. As a result of their decision to spend more money on the villagers, they started to build their own food. After spending at least 100,000 years, the town was very happy. They thought they are only going to give the animals food once, but, when they found out that they don't even have to give them water, the people said they are afraid. They decided to build the most powerful and best equipment they have now"
+          }
+        ],
+        "model": "gpt2",
+        "latency_ms": 6562.0
+      }
+    },
+    "concurrent_50_tokens": {
+      "requests": 8,
+      "wall_ms": 25308.2,
+      "throughput_rps": 0.32,
+      "median_latency_ms": 25100.6,
+      "max_latency_ms": 25166.1
+    },
+    "rss_mb": 1042.9
+  },
+  "p1q2": {
+    "available": true,
+    "first_call_short_ms": 348.1,
+    "short": {
+      "median_ms": 271.8,
+      "min_ms": 267.2,
+      "status": 200,
+      "response": {
+        "source_text": "Hello, how are you? I hope you are having a great day.",
+        "translated_text": "Bonjour, comment allez-vous ? J'espère que vous passez une bonne journée.",
+        "source_lang": "en",
+        "target_lang": "fr",
+        "model": "Helsinki-NLP/opus-mt-en-fr",
+        "chunks": 2,
+        "latency_ms": 264.4
+      }
+    },
+    "long": {
+      "median_ms": 7035.7,
+      "min_ms": 6569.7,
+      "status": 200,
+      "response": {
+        "source_text": "Artificial intelligence is transforming the way companies build software. Large language models can generate text, trans...",
+        "translated_text": "L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises construisent des logiciels. Les grands modèles linguistiques peuvent générer du texte, traduire des documents et répondre aux questions. Cependant, ils ont aussi d'importantes limites en ce qui concerne l'exactitude, le coût et la latence. Les ingénieurs doivent évaluer attentivement ces compromis avant de les déployer en production.",
+        "source_lang": "en",
+        "target_lang": "fr",
+        "model": "Helsinki-NLP/opus-mt-en-fr",
+        "chunks": 40,
+        "latency_ms": 7601.1
+      },
+      "source_chars": 3289
+    },
+    "repeat_short_ms": 329.3,
+    "concurrent_short": {
+      "requests": 8,
+      "wall_ms": 4718.7,
+      "throughput_rps": 1.7,
+      "median_latency_ms": 4500.9,
+      "max_latency_ms": 4529.3
+    },
+    "idioms": [
+      {
+        "en": "It's raining cats and dogs.",
+        "out": "Il pleut des chats et des chiens."
+      },
+      {
+        "en": "Break a leg tonight!",
+        "out": "Brisez une jambe ce soir !"
+      },
+      {
+        "en": "That exam was a piece of cake.",
+        "out": "Cet examen était un morceau de gâteau."
+      },
+      {
+        "en": "He kicked the bucket last year.",
+        "out": "Il a donné un coup de pied l'an dernier."
+      },
+      {
+        "en": "Let's call it a day.",
+        "out": "C'est un jour."
+      },
+      {
+        "en": "I'm feeling under the weather.",
+        "out": "Je me sens sous la météo."
+      },
+      {
+        "en": "That's lit, bro, no cap.",
+        "out": "C'est allumé, frérot, pas de casquette."
+      },
+      {
+        "en": "The bank was closed, so we sat on the bank of the river.",
+        "out": "La rive était fermée, alors nous nous sommes assis sur la rive de la rivière."
+      }
+    ],
+    "rss_mb": 849.1
+  },
+  "p2q1": {
+    "available": true,
+    "examples": [
+      {
+        "message": "Olá!",
+        "response": "Olá! Sou o assistente virtual do TP2. Como posso ajudar?",
+        "matched": true,
+        "llm": "fake"
+      },
+      {
+        "message": "O que é LangChain?",
+        "response": "LangChain é um framework para construir aplicações com LLMs, compondo prompts, modelos, parsers, memória e ferramentas em cadeias (chains).",
+        "matched": true,
+        "llm": "fake"
+      },
+      {
+        "message": "o que e fastapi",
+        "response": "FastAPI é um framework web Python de alta performance para criar APIs, com validação via Pydantic e documentação OpenAPI automática.",
+        "matched": true,
+        "llm": "fake"
+      },
+      {
+        "message": "Qual o horário de atendimento?",
+        "response": "Nosso atendimento funciona de segunda a sexta, das 9h às 18h.",
+        "matched": true,
+        "llm": "fake"
+      },
+      {
+        "message": "Quanto é 2+2?",
+        "response": "Desculpe, não sei responder a essa pergunta. Consulte GET /questions para ver as perguntas que eu conheço.",
+        "matched": false,
+        "llm": "fake"
+      }
+    ],
+    "latency": {
+      "median_ms": 1.5,
+      "min_ms": 1.5,
+      "status": 200,
+      "response": {
+        "message": "O que é LangChain?",
+        "response": "LangChain é um framework para construir aplicações com LLMs, compondo prompts, modelos, parsers, memória e ferramentas em cadeias (chains).",
+        "matched": true,
+        "llm": "fake"
+      }
+    },
+    "rss_mb": 85.7
+  },
+  "p2q2": {
+    "available": true,
+    "health": {
+      "status": "ok",
+      "model": "deepseek-flash",
+      "api_key_configured": true,
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com"
+    },
+    "first_call_short_ms": 1422.8,
+    "short": {
+      "median_ms": 991.3,
+      "min_ms": 924.1,
+      "status": 200,
+      "response": {
+        "source_text": "Hello, how are you? I hope you are having a great day.",
+        "translated_text": "Bonjour, comment allez-vous ? J'espère que vous passez une excellente journée.",
+        "source_lang": "en",
+        "target_lang": "fr",
+        "model": "deepseek-flash",
+        "latency_ms": 1215.8
+      }
+    },
+    "long": {
+      "median_ms": 3129.0,
+      "min_ms": 3116.6,
+      "status": 200,
+      "response": {
+        "source_text": "Artificial intelligence is transforming the way companies build software. Large language models can generate text, trans...",
+        "translated_text": "L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production. L'intelligence artificielle transforme la façon dont les entreprises développent des logiciels. Les grands modèles de langage peuvent générer du texte, traduire des documents et répondre à des questions. Cependant, ils présentent également des limites importantes en matière de précision, de coût et de latence. Les ingénieurs doivent évaluer soigneusement ces compromis avant de les déployer en production.",
+        "source_lang": "en",
+        "target_lang": "fr",
+        "model": "deepseek-flash",
+        "latency_ms": 3127.0
+      },
+      "source_chars": 3289
+    },
+    "repeat_short_ms": 929.5,
+    "concurrent_short": {
+      "requests": 8,
+      "wall_ms": 1436.5,
+      "throughput_rps": 5.57,
+      "median_latency_ms": 1106.3,
+      "max_latency_ms": 1289.4
+    },
+    "idioms": [
+      {
+        "en": "It's raining cats and dogs.",
+        "out": "Il pleut des cordes."
+      },
+      {
+        "en": "Break a leg tonight!",
+        "out": "Merde pour ce soir !"
+      },
+      {
+        "en": "That exam was a piece of cake.",
+        "out": "Cet examen était un jeu d'enfant."
+      },
+      {
+        "en": "He kicked the bucket last year.",
+        "out": "Il a cassé sa pipe l'année dernière."
+      },
+      {
+        "en": "Let's call it a day.",
+        "out": "Appelons-le un jour."
+      },
+      {
+        "en": "I'm feeling under the weather.",
+        "out": "Je ne me sens pas dans mon assiette."
+      },
+      {
+        "en": "That's lit, bro, no cap.",
+        "out": "C'est de la bombe, frère, sans mentir."
+      },
+      {
+        "en": "The bank was closed, so we sat on the bank of the river.",
+        "out": "La banque était fermée, alors nous nous sommes assis sur la rive de la rivière."
+      }
+    ],
+    "rss_mb": 115.1,
+    "cache_run": {
+      "first_call_ms": 1294.7,
+      "cached_calls_ms": [
+        15.0,
+        14.6
+      ]
+    },
+    "note": "Medido no DeepSeek (API compativel com OpenAI) com deepseek-flash, thinking=disabled, CACHE_MAXSIZE=0 na coleta principal; cache_run com cache ligado. Sem 429 na concorrencia. Teste extra: thinking=enabled gerou a mesma traducao com 147 tokens de saida (131 de raciocinio) contra 15."
+  },
+  "p2q3": {
+    "available": true,
+    "first_call_short_ms": 267.9,
+    "short": {
+      "median_ms": 209.4,
+      "min_ms": 201.3,
+      "status": 200,
+      "response": {
+        "source_text": "Hello, how are you? I hope you are having a great day.",
+        "translated_text": "Hallo, wie geht's? Ich hoffe, Sie haben einen tollen Tag.",
+        "source_lang": "en",
+        "target_lang": "de",
+        "model": "Helsinki-NLP/opus-mt-en-de",
+        "framework": "langchain+huggingface",
+        "chunks": 2,
+        "latency_ms": 207.6
+      }
+    },
+    "long": {
+      "median_ms": 4249.3,
+      "min_ms": 4247.7,
+      "status": 200,
+      "response": {
+        "source_text": "Artificial intelligence is transforming the way companies build software. Large language models can generate text, trans...",
+        "translated_text": "Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden. Künstliche Intelligenz transformiert die Art und Weise, wie Unternehmen Software bauen. Große Sprachmodelle können Text generieren, Dokumente übersetzen und Fragen beantworten. Sie haben jedoch auch wichtige Einschränkungen hinsichtlich Genauigkeit, Kosten und Latenz. Ingenieure müssen diese Kompromisse sorgfältig bewerten, bevor sie in der Produktion eingesetzt werden.",
+        "source_lang": "en",
+        "target_lang": "de",
+        "model": "Helsinki-NLP/opus-mt-en-de",
+        "framework": "langchain+huggingface",
+        "chunks": 40,
+        "latency_ms": 4813.7
+      },
+      "source_chars": 3289
+    },
+    "repeat_short_ms": 233.6,
+    "concurrent_short": {
+      "requests": 8,
+      "wall_ms": 3659.9,
+      "throughput_rps": 2.19,
+      "median_latency_ms": 3463.1,
+      "max_latency_ms": 3483.9
+    },
+    "idioms": [
+      {
+        "en": "It's raining cats and dogs.",
+        "out": "Es regnet Katzen und Hunde."
+      },
+      {
+        "en": "Break a leg tonight!",
+        "out": "Heute Abend ein Bein brechen!"
+      },
+      {
+        "en": "That exam was a piece of cake.",
+        "out": "Die Prüfung war ein Kinderspiel."
+      },
+      {
+        "en": "He kicked the bucket last year.",
+        "out": "Er hat letztes Jahr in den Eimer getreten."
+      },
+      {
+        "en": "Let's call it a day.",
+        "out": "Lass es uns einen Tag dauern."
+      },
+      {
+        "en": "I'm feeling under the weather.",
+        "out": "Ich fühle mich unter dem Wetter."
+      },
+      {
+        "en": "That's lit, bro, no cap.",
+        "out": "Das ist beleuchtet, Bruder, keine Mütze."
+      },
+      {
+        "en": "The bank was closed, so we sat on the bank of the river.",
+        "out": "Die Bank war geschlossen, also saßen wir am Ufer des Flusses."
+      }
+    ],
+    "rss_mb": 929.4
+  }
+}

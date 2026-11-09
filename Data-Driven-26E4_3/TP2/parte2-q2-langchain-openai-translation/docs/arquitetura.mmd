@@ -1,0 +1,15 @@
+flowchart LR
+    C["Cliente HTTP"] -->|"POST /translate"| F["FastAPI<br/>async def"]
+    F --> V["Pydantic<br/>validação"]
+    V -->|"await ainvoke"| P
+
+    subgraph LC["LangChain - chain singleton"]
+        P["ChatPromptTemplate<br/>system + human"] --> M["ChatOpenAI<br/>gpt-4o-mini, temp=0<br/>timeout=30s, retries=2"]
+        M --> O["StrOutputParser"]
+        K[("InMemoryCache<br/>maxsize=1000")] -.- M
+    end
+
+    M <==>|"HTTPS"| API["OpenAI API<br/>(nuvem; URL configurável<br/>via OPENAI_BASE_URL)"]
+    O --> J["Resposta JSON<br/>translated_text, latency_ms"]
+    M -.->|"429 / 401 / timeout"| E["Exception handler<br/>HTTP 429/503/504/502"]
+    ENV[".env<br/>OPENAI_API_KEY<br/>OPENAI_BASE_URL"] -.-> M
