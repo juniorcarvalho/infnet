@@ -124,14 +124,6 @@ Com o agente, uma pergunta em linguagem natural resolve tudo em segundos (UC3: ~
 follow-up ("e se fossem 36 meses?") reaproveita o contexto. Os cálculos continuam determinísticos, pois ficam nas tools,
 e as respostas citam a data dos dados consultados.
 
-## Limitações
-
-- Dependência de APIs externas (AwesomeAPI, BCB) e do Groq.
-- Memória volátil (RAM): perdida ao fechar a CLI.
-- Rate limit do Groq.
-- O LLM pode interpretar mal a pergunta (ex.: escolher taxa mensal em vez de anual).
-- Não é recomendação de investimento.
-
 ## Uso de IA
 
 - Usado claude code no modelo opus 5.5 para planejar e revisar o que foi implementado.
